@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Data</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container d-flex justify-content-center align-items-center" style="height:100vh;">
+
+    <div class="card p-4 shadow" style="width:400px;">
+        <h3 class="text-center mb-3">Edit Data</h3>
+
+        <form id="editForm">
+            <input type="text" id="nama" class="form-control mb-3">
+            <input type="email" id="email" class="form-control mb-3">
+
+            <button class="btn btn-primary w-100">Update</button>
+        </form>
+
+    </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+const urlParams = new URLSearchParams(window.location.search);
+const id = urlParams.get('id');
+
+$.get('/api/data', function(data){
+    const item = data.find(d => d.id == id);
+    $('#nama').val(item.nama);
+    $('#email').val(item.email);
+});
+
+$('#editForm').submit(function(e){
+    e.preventDefault();
+
+    $.ajax({
+        url: '/api/data/' + id,
+        method: 'PUT',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            nama: $('#nama').val(),
+            email: $('#email').val()
+        }),
+        success: function(){
+            alert('✅ Data berhasil diupdate');
+            window.location.href = 'data.html';
+        }
+    });
+});
+</script>
+
+</body>
+</html>
