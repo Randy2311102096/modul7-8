@@ -180,3 +180,7 @@ Tambah database (MySQL / MongoDB)
 Tambah login user
 Tambah validasi form
 Hosting ke internet
+
+link drive
+https://drive.google.com/drive/folders/18fs5LYR_9HfFOcibif6YPV8Ls1_Yr1gF?usp=drive_link
+
